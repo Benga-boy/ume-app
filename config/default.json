@@ -1,0 +1,6 @@
+{
+  "mongoURI": "mongodb+srv://Benga123:Benga123@ume.0qsim.mongodb.net/<ume>?retryWrites=true&w=majority",
+  "SECRET": "Bengaboysrules!",
+  "githubSecret": "9fa609fd9a4234c09f8f0fa2f9fa3929b4d3a3a1",
+  "githubClientId": "35ff8fb7fc5dea30327a"
+}
