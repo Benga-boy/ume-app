@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types'
 import {loginUser} from '../../actions/auth'
@@ -10,7 +10,6 @@ const Login = ({loginUser, isAuthenticated}) => {
     password: ''
   })
 
-  const history = useHistory()
 
   const {email, password} = loginData
 
@@ -23,21 +22,20 @@ const handleSubmit = e => {
   e.preventDefault()
   loginUser({email, password})
   setLoginData({...loginData, email: '', password: ''})
-  console.log(loginUser)
 }
 
     // Redirect if logged in
     if (isAuthenticated) {
       // push the user to their dashboard
-      return history.push('/dashboard')
+      return <Redirect to="/dashboard" />
     }
 
 
   return (
     <Fragment>
-      <div className="alert alert-danger">
+      {/* <div className="alert alert-danger">
         Invalid credentials
-      </div>
+      </div> */}
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead"><i className="fas fa-user"></i> Login to Your Account</p>
       <form onSubmit={handleSubmit} className="form" action="dashboard.html">
@@ -77,7 +75,7 @@ Login.propTypes = {
 }
 
 const mapStateToProps = state => ({
-  IsAuthenticated: state.auth.isAuthenticated
+  isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps, {loginUser})(Login) 

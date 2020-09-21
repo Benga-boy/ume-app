@@ -4,9 +4,13 @@ import Navbar from './Components/common/Navbar'
 import Home from './Components/common/Home'
 import Login from './Components/auth/Login'
 import Register from './Components/auth/Register'
+import Dashboard from './Components/dashboard/Dashboard'
+import SecureRoute from './Components/secureRouting/SecureRoute'
+import CreateProfile from './Components/profile-form/CreateProfile'
 import Alert from './Components/common/Alert'
 import {loadAUser} from './actions/auth'
 import {setAuthToken} from './utils/setAuthToken'
+
 
 // Redux
 import { Provider } from 'react-redux'
@@ -35,6 +39,8 @@ const App = () => {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <SecureRoute path="/dashboard" component={Dashboard} />
+              <SecureRoute path="/create-profile" component={CreateProfile} />
             </Switch>
           </section>
         </Fragment>

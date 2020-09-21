@@ -42,7 +42,7 @@ router.post('/', [
       avatar,
       password
     })
-    // hass the users password
+    // hash the users password
 
     const salt = await bcrypt.genSalt(8)
     user.password = await bcrypt.hash(password, salt)

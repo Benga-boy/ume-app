@@ -1,7 +1,18 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
+// Stop user going to landing page when logged in! 
+import {connect} from 'react-redux'
+import PropTypes from 'prop-types'
 
-const Home = () => {
+const Home = ({isAuthenticated}) => {
+
+  // if the user is authenticated then redirect them to their dashboard
+
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />
+  }
+
+
   return (
     <section className="landing">
       <div className="dark-overlay">
@@ -20,4 +31,12 @@ const Home = () => {
   )
 }
 
-export default Home
+Home.propTypes = {
+  isAuthenticated: PropTypes.bool
+}
+
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
+})
+
+export default connect(mapStateToProps)(Home) 

@@ -1,4 +1,4 @@
-import {REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL} from './types'
+import {REGISTER_SUCCESS, REGISTER_FAIL, USER_LOADED, AUTH_ERROR, LOGIN_SUCCESS, LOGIN_FAIL, LOGOUT_SUCESS, CLEAR_PROFILE} from './types'
 import {register, loadUser, login} from '../lib/api'
 import {setAlert} from './alert'
 import {setAuthToken} from '../utils/setAuthToken'
@@ -74,4 +74,14 @@ export const loginUser = ({email, password}) => async dispatch => {
       type: LOGIN_FAIL
     })
   }
+}
+
+// Logout / Clear profile
+export const logout = () => dispatch => {
+  dispatch({
+    type: CLEAR_PROFILE
+  })
+  dispatch({
+    type: LOGOUT_SUCESS
+  })
 }
