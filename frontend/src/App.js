@@ -7,6 +7,13 @@ import Register from './Components/auth/Register'
 import Dashboard from './Components/dashboard/Dashboard'
 import SecureRoute from './Components/secureRouting/SecureRoute'
 import CreateProfile from './Components/profile-form/CreateProfile'
+import EditProfile from './Components/profile-form/EditProfile'
+import AddExperience from './Components/profile-form/AddExperience'
+import AddEducation from './Components/profile-form/AddEducation'
+import Profiles from './Components/profiles/Profiles'
+import Profile from './Components/profiles/Profile'
+import Posts from './Components/posts/Posts'
+import Post from './Components/posts/Post'
 import Alert from './Components/common/Alert'
 import {loadAUser} from './actions/auth'
 import {setAuthToken} from './utils/setAuthToken'
@@ -39,8 +46,15 @@ const App = () => {
             <Switch>
               <Route path="/login" component={Login} />
               <Route path="/register" component={Register} />
+              <Route exact path="/profiles" component={Profiles} />
+              <Route exact path="/profile/:user_id" component={Profile} />
+              <SecureRoute exact path="/posts" component={Posts} />
+              <SecureRoute exact path="/posts/:post_id" component={Post} />
               <SecureRoute path="/dashboard" component={Dashboard} />
               <SecureRoute path="/create-profile" component={CreateProfile} />
+              <SecureRoute path="/edit-profile" component={EditProfile} />
+              <SecureRoute path="/add-experience" component={AddExperience} />
+              <SecureRoute path="/add-education" component={AddEducation} />
             </Switch>
           </section>
         </Fragment>

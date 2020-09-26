@@ -1,6 +1,7 @@
 const express = require('express')
 const Profile = require('../../models/Profile')
 const User = require('../../models/User')
+const Posts = require('../../models/Posts')
 const auth = require('../../middleware/auth')
 const { check, validationResult } = require('express-validator')
 
@@ -16,7 +17,7 @@ router.get('/me', auth, async (req, res) => {
       [ 'name', 'avatar'])
 
     if (!profile) {
-      res.status(400).json({ msg: 'There is no profile for this user' })
+      return res.status(400).json({ msg: 'There is no profile for this user' })
     }
 
     res.json(profile)
@@ -63,7 +64,7 @@ router.post('/', [auth, [
   if (status) profileFields.status = status
   if (githubusername) profileFields.githubusername = githubusername
   if (skills) {
-    profileFields.skills = skills.split(',').map(skill => skill.trim())
+    profileFields.skills = skills.split(' , ').map(skill => skill.trim())
   }
 
   // Build social fields
@@ -128,6 +129,9 @@ router.get('/user/:user_id', async (req, res) => {
 // ! Delete a user entirely...api/profile
 router.delete('/:user_id', auth, async (req, res) => {
   try {
+    // Remove posts created by that user
+    await Posts.deleteMany({ user: req.user.id })
+
     //Remove the users profile
     await Profile.findOneAndRemove({ user: req.user.id })
 
@@ -295,7 +299,7 @@ router.get('/github/:username', async(req, res) => {
         res.status(404).json({ msg: 'No Github profile found' })
       }
 
-      res.json(JSON.parse(body))
+      return res.json(JSON.parse(body))
     })
   } catch (err) {
     console.log(err.message)
