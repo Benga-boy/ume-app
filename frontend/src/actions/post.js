@@ -1,6 +1,6 @@
 import { setAlert } from './alert'
-import { GET_POSTS, POST_ERROR, LIKE_POST, DELETE_POST, ADD_POST, GET_POST} from './types'
-import { getAllPost, likePost, unlikePost, deleteAPost, addAPost, getSinglePost } from '../lib/api'
+import { GET_POSTS, POST_ERROR, LIKE_POST, DELETE_POST, ADD_POST, GET_POST, POST_COMMENT, REMOVE_COMMENT} from './types'
+import { getAllPost, likePost, unlikePost, deleteAPost, addAPost, getSinglePost, postComment, deleteComment } from '../lib/api'
 
 
 // GET a Post
@@ -112,3 +112,43 @@ export const deletePost = id => async dispatch => {
   }
 }
 
+
+// Add a comment to a post
+export const addComment = (postId, formData) => async dispatch => {
+  try {
+    const res = await postComment(postId, formData)
+
+    dispatch({
+      type: POST_COMMENT,
+      payload: res.data
+    })
+
+    dispatch(setAlert('Comment Added', 'success'))
+
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    })
+  }
+}
+
+// Delete a comment
+export const deleteAComment = (postId, commentId) => async dispatch => {
+  try {
+    await deleteComment(postId, commentId)
+
+    dispatch({
+      type: REMOVE_COMMENT,
+      payload: commentId
+    })
+
+    dispatch(setAlert('Comment Deleted', 'success'))
+
+  } catch (err) {
+    dispatch({
+      type: POST_ERROR,
+      payload: {msg: err.response.statusText, status: err.response.status}
+    })
+  }
+}

@@ -115,6 +115,16 @@ export const unlikePost = (id) => {
   return axios.delete(`${umeUrl}/posts/unlike/${id}`)
 }
 
+// Add a comment to a post
+export const postComment = (id, formData) => {
+  return axios.put(`${umeUrl}/posts/comments/${id}`, formData)
+}
+
+// Delete a comment from a post
+export const deleteComment = (post_id, comment_id) => {
+  return axios.put(`${umeUrl}/comments/${post_id}/${comment_id}`)
+}
+
 // Delete a post
 export const deleteAPost = (id) => {
   return axios.delete(`${umeUrl}/posts/${id}`)

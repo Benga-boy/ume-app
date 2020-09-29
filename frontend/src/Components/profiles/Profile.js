@@ -18,7 +18,7 @@ const Profile = ({getASingleUserProfile, profile: {profile, loading}, auth, foll
   }, [getASingleUserProfile, params.user_id])
 
   const handleUserFollow = () => {
-    followUser(params.user_id)
+    followUser(profile._id)
   }
 
   return (

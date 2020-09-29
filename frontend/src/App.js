@@ -12,6 +12,7 @@ import AddExperience from './Components/profile-form/AddExperience'
 import AddEducation from './Components/profile-form/AddEducation'
 import Profiles from './Components/profiles/Profiles'
 import Profile from './Components/profiles/Profile'
+import Following from './Components/dashboard/Following'
 import Posts from './Components/posts/Posts'
 import Post from './Components/posts/Post'
 import Alert from './Components/common/Alert'
@@ -50,7 +51,8 @@ const App = () => {
               <Route exact path="/profile/:user_id" component={Profile} />
               <SecureRoute exact path="/posts" component={Posts} />
               <SecureRoute exact path="/posts/:post_id" component={Post} />
-              <SecureRoute path="/dashboard" component={Dashboard} />
+              <SecureRoute exact path="/dashboard" component={Dashboard} />
+              <SecureRoute exact path="/dashboard/followings" component={Following} />
               <SecureRoute path="/create-profile" component={CreateProfile} />
               <SecureRoute path="/edit-profile" component={EditProfile} />
               <SecureRoute path="/add-experience" component={AddExperience} />

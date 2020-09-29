@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Link, useHistory } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { setAlert } from '../../actions/alert'
 import { registerUser } from '../../actions/auth'
@@ -13,8 +13,6 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
     password: '',
     password2: ''
   })
-
-  const history = useHistory()
 
   const { name, email, password, password2 } = formData
 
@@ -34,11 +32,11 @@ const Register = ({ setAlert, registerUser, isAuthenticated }) => {
     }
   }
 
-  // Redirect to dashboard upon registration
-  if (isAuthenticated) {
-    // push the user to their dashboard
-    return history.push('/dashboard')
-  }
+    // Redirect when registered
+    if (isAuthenticated) {
+      // push the user to their dashboard
+      return <Redirect to="/dashboard" />
+    }
 
   return (
     <Fragment>

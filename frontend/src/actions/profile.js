@@ -7,7 +7,8 @@ import {
   ACCOUNT_DELETED,
   GET_PROFILES,
   GET_REPOS,
-  FOLLOW_USER
+  FOLLOW_USER,
+  NO_REPOS
 } from './types'
 import { getUserProfile, createProfile, addExperience, addEducation, deleteExperience, deleteEducation, deleteProfile, getAllProfiles, getASingleProfile, getUserGithubRepos, followAnotherUser } from '../lib/api'
 
@@ -74,8 +75,7 @@ export const getGithubRepos = (username) => async dispatch => {
     })
   } catch (err) {
     dispatch({
-      type: PROFILE_ERROR,
-      payload: {msg: err.response.statusText, status: err.response.status}
+      type: NO_REPOS
     })
   }
 }
@@ -234,7 +234,7 @@ export const followUser = (id) => async dispatch => {
 
     dispatch({
       type: FOLLOW_USER,
-      payload: {id, favUser: res.data}
+      payload: res.data
     })
 
     dispatch(setAlert('Following User', 'success'))

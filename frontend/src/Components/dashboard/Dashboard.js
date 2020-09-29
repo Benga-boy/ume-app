@@ -6,6 +6,7 @@ import {getCurrentProfile, deleteUserProfile} from '../../actions/profile'
 import DashboardActions from './DashboardActions'
 import Experience from './Experience'
 import Education from './Education'
+// import Profile from '../profiles/Profile'
 
 const Dashboard = ({getCurrentProfile, auth: {user}, profile: {profile, loading}, deleteUserProfile}) => {
   
@@ -22,10 +23,10 @@ const Dashboard = ({getCurrentProfile, auth: {user}, profile: {profile, loading}
       <i className="fas fa-user"></i> Welcome {user && user.name}
     </p>
     {profile !== null ? (<Fragment>
+      <Link className="btn" to="/dashboard/followings">{`Following: ${profile.following.favUsers.length} Devs`} </Link> <br/> <br/>
       <DashboardActions/>
       <Experience experience={profile.experience} />
       <Education education={profile.education} />
-
       {/* Delete the users account! */}
       <div className="my-2">
         <button onClick={() => deleteUserProfile(user._id)}  className="btn btn-danger">

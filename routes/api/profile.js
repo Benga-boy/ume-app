@@ -296,7 +296,7 @@ router.get('/github/:username', async(req, res) => {
       }
 
       if (response.statusCode !== 200) {
-        res.status(404).json({ msg: 'No Github profile found' })
+        return res.status(404).json({ msg: 'No Github profile found' })
       }
 
       return res.json(JSON.parse(body))
@@ -312,7 +312,7 @@ router.post('/followings/:user_id', auth, async (req, res) => {
   try {
     const user = await Profile.findOne({ user: req.user.id })
     if (!user) throw new Error('Unauthorised!')
-    const favUsers = await Profile.findById(req.params.user_id).populate('User', ['name', 'avatar', '_id'])
+    const favUsers = await Profile.findById(req.params.user_id)
     if (!favUsers) {
       return res.status(400).json({ msg: 'User not found' })
     }
@@ -324,7 +324,7 @@ router.post('/followings/:user_id', auth, async (req, res) => {
     }
     user.following.favUsers.push(favUsers)
     await user.save()
-    res.status(201).json(user.following.favUsers)
+    return res.status(201).json(favUsers)
   } catch (err) {
     console.log(err.message)
     res.status(500).send('Server Error!')
