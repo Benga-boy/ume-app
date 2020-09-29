@@ -7,7 +7,8 @@
     "start": "node index",
     "dev": "nodemon index",
     "frontend": "npm start --prefix frontend",
-    "server": "concurrently \"npm run dev\" \"npm run frontend\""
+    "server": "concurrently \"npm run dev\" \"npm run frontend\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && yarn build --prefix frontend"
   },
   "author": "Benga Olasebikan",
   "license": "MIT",
