@@ -8,7 +8,7 @@
     "dev": "nodemon index",
     "frontend": "npm start --prefix frontend",
     "server": "concurrently \"npm run dev\" \"npm run frontend\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && yarn build --prefix frontend"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "Benga Olasebikan",
   "license": "MIT",
